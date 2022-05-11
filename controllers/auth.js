@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const errorHandler = require('../utils/error-handlers');
 const keys = require('../config/keys');
 const User = require('../models/User');
 
@@ -60,7 +61,7 @@ module.exports.register = async function (request, response) {
       await user.save();
       response.status(201).json(user);
     } catch(e) {
-      // TODO: to do an error
+      errorHandler(response, e);
     }
     
   }
